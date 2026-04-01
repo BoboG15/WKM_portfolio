@@ -27,7 +27,7 @@
                     <li><a href="event-manager.html">Event Management</a></li>
                 </ul>
             </li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#about">About me</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -45,8 +45,9 @@
     <!-- Main Content -->
     <main class="main-content">
 
-    <!-- Hero Section -->
+    <!-- Hero Section with Full Screen Background -->
     <header class="hero">
+        <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="profile-image">
                 <img src="images/profile.jpg" alt="Washington Kariuki Mwangi">
@@ -56,6 +57,44 @@
             <a href="#contact" class="btn-primary">Get In Touch</a>
         </div>
     </header>
+
+    <!-- My Work - Full Page Slideshow -->
+    <section class="featured-work" id="work">
+        <div class="container">
+            <div class="slideshow-container">
+                <div class="slide active">
+                    <img src="images/portrait-session.jpg" alt="Portrait Session">
+                    <div class="slide-content">
+                        <span>Photography</span>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="images/logo.jpg" alt="Logo Design">
+                    <div class="slide-content">
+                        <span>Graphic Design</span>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="images/Event.jpg" alt="Corporate Event">
+                    <div class="slide-content">
+                        <span>Event Management</span>
+                    </div>
+                </div>
+                
+                <!-- Navigation Arrows -->
+                <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                
+                <!-- Dots -->
+                <div class="dots-container">
+                    <span class="dot active" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- About Section -->
     <section class="about" id="about">
@@ -94,50 +133,6 @@
                     <h3>Event Management</h3>
                     <p>Professional planning and execution.</p>
                     <a href="event-manager.html" class="btn-link">View Portfolio</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Videography Section -->
-    <section class="portfolio-section">
-        <div class="container">
-            <h2>Videography</h2>
-            <p class="lead">Short film from my portfolio.</p>
-            <div class="video-wrapper">
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube.com/embed/M24uK5fOLR8" 
-                    title="Short film" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- Featured Work -->
-    <section class="featured-work">
-        <div class="container">
-            <h2>Featured Work</h2>
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="images/portrait-session.jpg" alt="Portrait Session">
-                    <span>Photography</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/logo.jpg" alt="Logo Design">
-                    <span>Graphic Design</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/shortfilm.jpg" alt="Short Film">
-                    <span>Videography</span>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/Event.jpg" alt="Corporate Event">
-                    <span>Event Management</span>
                 </div>
             </div>
         </div>
@@ -229,6 +224,59 @@
                 link.addEventListener('click', closeSidebar);
             });
         });
+    </script>
+
+    <!-- Slideshow JavaScript -->
+    <script>
+        let slideIndex = 1;
+        let slideInterval;
+        
+        showSlides(slideIndex);
+        
+        // Auto advance slides every 5 seconds
+        slideInterval = setInterval(function() {
+            changeSlide(1);
+        }, 5000);
+        
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+            resetInterval();
+        }
+        
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+            resetInterval();
+        }
+        
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName('slide');
+            let dots = document.getElementsByClassName('dot');
+            
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = 'none';
+                slides[i].classList.remove('active');
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('active');
+            }
+            
+            slides[slideIndex - 1].style.display = 'block';
+            setTimeout(function() {
+                slides[slideIndex - 1].classList.add('active');
+            }, 10);
+            dots[slideIndex - 1].classList.add('active');
+        }
+        
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(function() {
+                changeSlide(1);
+            }, 5000);
+        }
     </script>
 
 </body>
