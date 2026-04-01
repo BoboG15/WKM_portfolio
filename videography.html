@@ -13,11 +13,11 @@
     <!-- Sidebar Navigation -->
     <nav class="sidebar-nav">
         <div class="sidebar-header">
-            <a href="INDEX.HTML" class="sidebar-logo">WKM</a>
+            <a href="index.html" class="sidebar-logo">WKM</a>
             <button class="close-sidebar">&times;</button>
         </div>
         <ul class="sidebar-menu">
-            <li><a href="INDEX.HTML">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li class="dropdown open">
                 <a href="#" class="dropdown-toggle">Services <span class="arrow">&#9662;</span></a>
                 <ul class="dropdown-menu">
@@ -126,7 +126,7 @@
             <div class="footer-column">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="INDEX.HTML">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="photography.html">Photography</a></li>
                     <li><a href="graphic-designer.html">Graphic Design</a></li>
                     <li><a href="videography.html">Videography</a></li>
@@ -167,11 +167,18 @@
             const dropdownToggle = document.querySelector('.dropdown-toggle');
             const dropdown = document.querySelector('.dropdown');
 
-            // Open sidebar
+            // Function to check if mobile
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
+
+            // Open sidebar (mobile only)
             menuToggle.addEventListener('click', function() {
-                sidebar.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
+                if (isMobile()) {
+                    sidebar.classList.add('active');
+                    overlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
             });
 
             // Close sidebar
